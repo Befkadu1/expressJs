@@ -1,24 +1,22 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 import { environment } from './environments'
 const API = environment.localUrl;
 class App extends React.Component {
-
   state = {
-    data: null
-  };
+    person: null
+  }
 
   componentDidMount() {
     // Call our fetch function below once the component mounts
     this.callBackendAPI()
-      .then(res => this.setState({ data: res.express }))
+      .then(res => this.setState({ person: res.express }))
       .catch(err => console.log(err));
   }
 
   // Fetches our GET route from the Express server. (Note the route we are fetching matches the GET route from server.js
   callBackendAPI = async () => {
-    const response = await fetch(API + 'express_backend');
+    const response = await fetch(API + 'persons');
     const body = await response.json();
 
     if (response.status !== 200) {
@@ -31,9 +29,8 @@ class App extends React.Component {
     return (
       <div >
         <header>
-
         </header>
-        <p>{this.state.data}</p>
+        <p>{this.state.person}</p>
       </div>
     );
   }
